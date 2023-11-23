@@ -21,7 +21,7 @@ export default function RootLayout({
         <Nav />
         <div className="flex  ">
           <Sitebar />
-          <div className="w-screen ">{children}</div>
+          <div className="w-screen   ">{children}</div>
         </div>
 
       </body>

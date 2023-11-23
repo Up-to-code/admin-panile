@@ -6,7 +6,7 @@ let data = <types>{
   Imageurl: "",
   cont: "",
   Skiles: [],
-  show:""
+  show: "",
 };
 
 export const get_data = () => {
@@ -14,7 +14,7 @@ export const get_data = () => {
 };
 export const Chenge_data = (name: string, value: string | string[]) => {
   name = name.toLocaleLowerCase();
-  if (typeof value === "string") {  
+  if (typeof value === "string") {
     if (name === "title") {
       data = { ...data, title: value };
     }
@@ -39,20 +39,17 @@ export const Chenge_data = (name: string, value: string | string[]) => {
       data = { ...data, Skiles: value };
     }
   }
-
-
 };
 
-export const Skiles_array = (word :string) => {
+export const Skiles_array = (word: string) => {
   let skile = data.Skiles;
   let the_word = word;
   let arr = skile.lastIndexOf(the_word);
   if (arr != -1) {
     let app = skile.splice(arr, arr);
-    Chenge_data("Skiles" , skile)
+    Chenge_data("Skiles", skile);
   } else {
     skile.push(the_word);
-    Chenge_data("Skiles" , skile)
+    Chenge_data("Skiles", skile);
   }
 };
-
