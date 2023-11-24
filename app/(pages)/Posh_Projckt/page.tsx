@@ -1,4 +1,3 @@
-
 import Normel from "@/app/components/Inpouts/Normel";
 import File from "@/app/components/Inpouts/File";
 import Container from "@/app/components/public_compnets/Container";
@@ -10,15 +9,17 @@ import Linkes_input from "@/app/components/Inpouts/Linkes_input";
 function page() {
   return (
     <Container>
-      <Normel />
-      <div className="flex justify-between gap-2">
-        <Linkes_input type_link={"githup"}/>
-        <Linkes_input type_link={"show"}/>
+      <div className="px-10 ">
+        <Normel />
+        <div className="flex justify-between gap-2">
+          <Linkes_input type_link={"githup"} />
+          <Linkes_input type_link={"show"} />
+        </div>
+        <File />
+        <Input_h_t />
+        <Skiles_box />
+        <Buoon_1 />
       </div>
-      <File />
-      <Input_h_t /> 
-      <Skiles_box />
-      <Buoon_1/>
     </Container>
   );
 }
