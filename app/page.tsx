@@ -1,4 +1,7 @@
+/* eslint-disable @next/next/no-async-client-component */
+"use client"
 import Image from "next/image";
+
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./Firebase/db";
 import Link from "next/link";
