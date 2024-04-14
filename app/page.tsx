@@ -23,10 +23,8 @@ const first = async () => {
       data: doc.data(),
     });
   })
+  first()
   setD(data)
-  
-  
-  ;
  }
   return (
     <>
