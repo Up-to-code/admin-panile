@@ -3,7 +3,7 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCXiJbQOAUCGUlTSGjYHs9tkKkadhlBxb0",
+    apiKey: process.env.API_KAY,
     authDomain: "my-website-310.firebaseapp.com",
     databaseURL: "https://my-website-310-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "my-website-310",

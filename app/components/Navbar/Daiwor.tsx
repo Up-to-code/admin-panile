@@ -20,7 +20,6 @@ function Daiwor({ isActive, sNotActive }: isOpn) {
     );
   }, [isActive]);
 
-  console.log();
   const close = () => {
     sNotActive(false);
   };

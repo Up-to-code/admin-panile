@@ -6,10 +6,8 @@ function Icone({ isActive, isNotActive }: isacktiv) {
   function ClickIcon() {
     if (isActive == true) {
       isNotActive(false);
-      console.log("1");
     } else {
       isNotActive(true);
-      console.log("0");
     }
   }
 

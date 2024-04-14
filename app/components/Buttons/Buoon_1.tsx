@@ -6,8 +6,10 @@ import { db } from "@/app/Firebase/db";
 import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import { toast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 function Buoon_1() {
+  const router = useRouter()
   const [Button_Lodeing, setButton_Lodeing] = useState("Saend")
   const onclick_send = async () => {
     let data = get_data()
@@ -23,7 +25,7 @@ function Buoon_1() {
       */
       const docRef = await addDoc(collection(db, "Projekts"), data).then(() => {
         setButton_Lodeing("send")
-  
+    router.refresh()
       });
     }else{
       toast({

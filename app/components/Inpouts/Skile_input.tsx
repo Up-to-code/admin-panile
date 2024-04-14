@@ -1,20 +1,25 @@
 "use client";
 
 import { db } from "@/app/Firebase/db";
-import { Get_image } from "@/public/Get_image";
 import { addDoc, collection } from "firebase/firestore";
 import Image from "next/image";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useRef, useState } from "react";
 
 export default function Skile_input() {
   const [Skile, setSkile] = useState("");
+  const ref = useRef(null)
   const Hadelerinput = (valu: string) => {
     setSkile(valu);
   };
+  const router = useRouter();
   const HadelOncleck = async () => {
     // Add a new document with a generated id.
     const docRef = await addDoc(collection(db, "Skiles"), {
       Skile: Skile,
+    }).then(() => {
+      router.refresh()
+      setSkile("reload")
     });
   };
 
@@ -28,9 +33,10 @@ export default function Skile_input() {
             HadelOncleck();
           }}
         >
-          <Image src={Get_image.add} width={"30"} alt="add" />
+          <Image src={"/add-50.png"} height={30} width={"30"} alt="add" />
         </label>
         <input
+          ref={ref}
           onChange={(e) => {
             Hadelerinput(e.target.value);
           }}

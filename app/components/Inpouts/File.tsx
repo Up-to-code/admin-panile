@@ -33,7 +33,6 @@ function File() {
   }
 
   const UploadFile = () => {
-    console.log("1")
     if (srcimage && uploadimage) {
       const imgeref = ref(storage, `Projkets_img/${imagename + v4()}.jpg`)
       setbuttoneUoladstaet("loading")
@@ -41,7 +40,6 @@ function File() {
         toast({
           description: " Image is uoloaded",
         })
-        console.log(res)
         getDownloadURL(res.ref).then((url) => {
         setimageurl(url)
         Chenge_data("path_url", url)
