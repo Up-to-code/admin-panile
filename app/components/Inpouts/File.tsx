@@ -1,67 +1,83 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
-// import Image from "next/image";
-// import { useState } from "react";
-// import { Get_image } from "@/public/Get_image";
+
 import { Chenge_data } from "@/app/Store_data/Store";
-import {  UploadDropzone } from "@bytescale/upload-widget-react";
-
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { useState } from "react";
+import { storage } from "@/app/Firebase/db";
+import { toast } from "@/components/ui/use-toast";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { v4 } from "uuid"
+import { Loader2, Terminal } from "lucide-react";
 function File() {
-  // const [srcimage, setSrcImage] = useState("");
-  // function HadelFile(e: any) {
-  //   if (e.target.files?.[0]) {
-  //     if (
-  //       e.target.files?.[0].type == "image/jpeg" ||
-  //       e.target.files?.[0].type == "image/png"
-  //     ) {
-  //       const fl = e.target.files?.[0];
-  //       setSrcImage(URL.createObjectURL(e.target.files[0]));
-   
-  //       console.log(fl)
-  //     } else {
-  //       console.log("no");
-  //     }
-  //   }
-  // }    
+  const [srcimage, setSrcImage] = useState("");
+  const [uploadimage, setUploadimage] = useState(null)
+  const [buttoneUoladstaet, setbuttoneUoladstaet] = useState("normel")
+  const [imagename, setimagename] = useState("");
+  const [imageurl, setimageurl] = useState("")
+  function HadelFile(e: any) {
+    if (e.target.files?.[0]) {
+      if (
+        e.target.files?.[0].type
+      ) {
+        const fl = e.target.files?.[0];
+        setSrcImage(URL.createObjectURL(e.target.files[0]));
+        setUploadimage(fl)
+        setimagename(fl.name)
+      } else {
 
-  const options = {
-    apiKey: "public_kW15bmq9jWntSknYRt5i92b6dZUV", // This is your API key.
-    maxFileCount: 1,
-    showFinishButton: true, // Note: You must use 'onUpdate' if you set 'showFinishButton: false' (default).
-    styles: {
-      colors: {
-        primary: "#377dff"
       }
     }
-  };
+  }
 
-   
-  return (
-    <div className="min-w-[200px] max-w-[600px] m-auto relative ">
-      {/* <div className="w-full  h-max  p-2    bg-zinc-200  mt-9 rounded-lg     ">
-        <input
-          className="w-full h-full absolute bg-red-200 z-10 opacity-0  "
-          type="file"
-          onChange={(e) => {
-            HadelFile(e);
-          }}
-        />
-        <div className="max-h-[208px] w-full   flex justify-center items-center  top-0">
-          <Image
-            src={srcimage ? srcimage : Get_image.upload_icone}
-            alt={"image"}
-            width={srcimage ? "150" : "50"}
-            height={srcimage ? "200" : "50"}
-            className="rounded max-h-48"
-          ></Image>
-        </div>
-      </div> */}
-        <UploadDropzone 
-        onUpdate={({ uploadedFiles }) =>Chenge_data("path_url", uploadedFiles.map(x => x.fileUrl).join("\n"))}
-        onComplete={files => console.log(files.map(x => x.fileUrl).join("\n"))}
-        width="600px"
-        height="200px" options={options} />
+  const UploadFile = () => {
+    console.log("1")
+    if (srcimage && uploadimage) {
+      const imgeref = ref(storage, `Projkets_img/${imagename + v4()}.jpg`)
+      setbuttoneUoladstaet("loading")
+      uploadBytes(imgeref, uploadimage).then((res) => {
+        toast({
+          description: " Image is uoloaded",
+        })
+        console.log(res)
+        getDownloadURL(res.ref).then((url) => {
+        setimageurl(url)
+        Chenge_data("path_url", url)
+        })
+        setbuttoneUoladstaet("dan")
+      })
+
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "Your not selicit image",
+      })
+    }
+  }
+
+  return <div>
+    <div className="relative h-80 my-10 rounded-md border border-zinc-500">
+      <input type="file" accept="image/*" name="" id="" onChange={HadelFile} className="opacity-0 w-full h-80 bg-blue-400 absolute z-10" />
+      <div className="absolute top-0 flex justify-center items-center w-full h-full">
+        <Image src={srcimage ? srcimage : "/uploa-100.png"} alt="" width={200} height={200} className={srcimage ? " h-72 w-auto border rounded-md my-5" : " h-10 w-auto"} />
+        <Button disabled={buttoneUoladstaet == "loading" || buttoneUoladstaet == "dan" ? true : false} variant="outline" className="absolute bottom-5 right-5 z-20" onClick={UploadFile}>
+
+          {buttoneUoladstaet == "loading" ? (<Loader2 className="mr-2 h-4 w-4 animate-spin" />) : ""}
+          Upload</Button>
+      </div>
     </div>
-  );
+    <Alert>
+      <Terminal className="h-4 w-4" />
+      <AlertTitle>Image URL!</AlertTitle>
+      <AlertDescription>
+        {imageurl}
+      </AlertDescription>
+    </Alert>
+  </div>
+
 }
 
 export default File;

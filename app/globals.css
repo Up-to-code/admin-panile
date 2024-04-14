@@ -1,71 +1,76 @@
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
+  @tailwind components;
+  @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;900&display=swap");
-* {
-  box-sizing: border-box;
-}
-:root {
-  --PaynerColor: #f1f1f1;
-  --Black: #151515;
-  --waite: #fff;
-}
-body {
-  background: var(--PaynerColor);
-  color: #151515;
-  font-family: "Cairo", sans-serif;
-}
+  @layer base {
+    :root {
+      --background: 0 0% 100%;
+      --foreground: 222.2 84% 4.9%;
 
-.PaynerColorLaght {
-  background: var(--PaynerColor);
-}
+      --card: 0 0% 100%;
+      --card-foreground: 222.2 84% 4.9%;
 
-.text_PaynerColor {
-  color: var(--Black);
-}
-.PaynerColor {
-  background: var(--PaynerColor);
-}
-.SacendColor {
-  background: var(--SacendColor);
-}
+      --popover: 0 0% 100%;
+      --popover-foreground: 222.2 84% 4.9%;
 
-::selection {
-  background: #3b82f6;
-  color: white;
-}
-::-webkit-scrollbar {
-  background: none;
-}
-.Hero {
-  height: calc(100vh - 56px);
-}
-.flitr {
-  filter: grayscale(1);
-}
-.cleck {
-  height: calc(100vh - 56px);
-}
-.HeroINAll {
-  @apply flex justify-center  Hero  min-h-[600px] w-full;
-}
-.ContantInHero {
-  @apply flex flex-col items-center justify-center;
-}
-.animate-all {
-  transition: all 500ms;
-}
+      --primary: 222.2 47.4% 11.2%;
+      --primary-foreground: 210 40% 98%;
 
-.bg-lole:hover {
-  background: rgba(36, 36, 36, 0.208);
-}
+      --secondary: 210 40% 96.1%;
+      --secondary-foreground: 222.2 47.4% 11.2%;
 
-@media (min-width: 768px) {
-  .HeroINAll {
-    @apply grid grid-cols-1  md:grid-cols-2  Hero  min-h-[600px] w-full;
+      --muted: 210 40% 96.1%;
+      --muted-foreground: 215.4 16.3% 46.9%;
+
+      --accent: 210 40% 96.1%;
+      --accent-foreground: 222.2 47.4% 11.2%;
+
+      --destructive: 0 84.2% 60.2%;
+      --destructive-foreground: 210 40% 98%;
+
+      --border: 214.3 31.8% 91.4%;
+      --input: 214.3 31.8% 91.4%;
+      --ring: 222.2 84% 4.9%;
+
+      --radius: 0.5rem;
+    }
+
+    .dark {
+      --background: 222.2 84% 4.9%;
+      --foreground: 210 40% 98%;
+
+      --card: 222.2 84% 4.9%;
+      --card-foreground: 210 40% 98%;
+
+      --popover: 222.2 84% 4.9%;
+      --popover-foreground: 210 40% 98%;
+
+      --primary: 210 40% 98%;
+      --primary-foreground: 222.2 47.4% 11.2%;
+
+      --secondary: 217.2 32.6% 17.5%;
+      --secondary-foreground: 210 40% 98%;
+
+      --muted: 217.2 32.6% 17.5%;
+      --muted-foreground: 215 20.2% 65.1%;
+
+      --accent: 217.2 32.6% 17.5%;
+      --accent-foreground: 210 40% 98%;
+
+      --destructive: 0 62.8% 30.6%;
+      --destructive-foreground: 210 40% 98%;
+
+      --border: 217.2 32.6% 17.5%;
+      --input: 217.2 32.6% 17.5%;
+      --ring: 212.7 26.8% 83.9%;
+    }
   }
-  .ContantInHero {
-    @apply flex flex-col items-start justify-center;
+
+  @layer base {
+    * {
+      @apply border-border;
+    }
+    body {
+      @apply bg-background text-foreground;
+    }
   }
-}

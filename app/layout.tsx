@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster";
 import Footer from "./components/Footer/Footertsx";
 import Gethup from "./components/Gethup/Gethup";
 import Nav from "./components/Navbar/Nav";
@@ -21,7 +22,9 @@ export default function RootLayout({
         <Nav />
         <div className="flex  ">
           <Sitebar />
-          <div className="w-screen   ">{children}</div>
+          <main className="w-screen   ">{children}</main>
+          <Toaster />
+
         </div>
 
       </body>

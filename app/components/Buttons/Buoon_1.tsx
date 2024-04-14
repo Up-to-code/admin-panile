@@ -5,26 +5,33 @@ import { get_data } from "@/app/Store_data/Store"
 import { db } from "@/app/Firebase/db";
 import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
+import { toast } from "@/components/ui/use-toast";
 
 function Buoon_1() {
   const [Button_Lodeing, setButton_Lodeing] = useState("Saend")
   const onclick_send = async () => {
-    setButton_Lodeing("Loading....")
     let data = get_data()
-
-    console.log(data)
-    /*
-      title: "",
-      Imageurl: "",
-      cont: "",
-      Skiles: [],
-      show:""
-    */
-
-    const docRef = await addDoc(collection(db, "Projekts"), data).then(() => {
-      setButton_Lodeing("send")
-
-    });
+    if (data.Imageurl) {
+      setButton_Lodeing("Loading....")
+    
+      /*
+        title: "",
+        Imageurl: "",
+        cont: "",
+        Skiles: [],
+        show:""
+      */
+      const docRef = await addDoc(collection(db, "Projekts"), data).then(() => {
+        setButton_Lodeing("send")
+  
+      });
+    }else{
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "image ins here",
+      })
+    }
 
 
   }

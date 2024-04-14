@@ -3,7 +3,7 @@ interface types {
 }
 let data = <types>{
   title: "",
-  Imageurl: "",
+  Imageurl: "" ,
   cont: "",
   Skiles: [],
   show: "",
