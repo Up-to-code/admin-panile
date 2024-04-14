@@ -7,10 +7,14 @@ import { db } from "./Firebase/db";
 import Link from "next/link";
 import Dletebutton from "./components/DeletButton";
 import Container from "./components/public_compnets/Container";
-let data: any[] = [];
+import { useState } from "react";
 
-export default async function Home() {
-  const querySnapshot = await getDocs(collection(db, "Projekts"));
+
+export default  function Home() {
+const [D,setD] =useState<any[] | Document[]>()
+const first = async () => { 
+  let data: any[] = [];
+    const querySnapshot = await getDocs(collection(db, "Projekts"));
   data = [];
   querySnapshot.forEach((doc) => {
     // doc.data() is never undefined for query doc snapshots
@@ -18,12 +22,17 @@ export default async function Home() {
       id: doc.id,
       data: doc.data(),
     });
-  });
+  })
+  setD(data)
+  
+  
+  ;
+ }
   return (
     <>
       <Container>
         <div className="flex flex-wrap  m-auto gap-2 ">
-          {data.map((doc) => {
+          {D&& D.map((doc) => {
             return (
               <div
                 key={doc.id}
